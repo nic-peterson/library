@@ -8,7 +8,31 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-   
+    <div class="app">
+      <div class="title">Library</div>
+      <div class="add-book-container">
+        <button id="add-book-btn">NEW BOOK</button>
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <form id="submit-book">
+              <label for="book-title">Book Title</label><br />
+              <input type="text" id="book-title" name="book-title" /><br />
+              <label for="book-author">Book Author:</label><br />
+              <input type="text" id="book-author" name="book-author" /><br />
+              <label for="book-pages"># of Pages:</label><br />
+              <input type="text" id="book-pages" name="book-pages" /><br />
+              <label for="book-read">Have you read:</label><br />
+              <input type="checkbox" id="book-read" name="book-read" /><br />
+              <button type="submit">Submit Book!</button>
+            </form>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+
+      <div class="card-container"></div>
+    </div>
 
     <script src="./library.js"></script>
   </body>
