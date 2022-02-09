@@ -9,22 +9,24 @@ const cardContainer = document.querySelector(".card-container");
 /*
 Create a book object and define the functions to add, remove, and display books to the library.
 */
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  get info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      !this.read ? "not read yet" : "have read!"
+    }`;
+  }
+  toggleRead() {
+    return (this.read = !this.read);
+  }
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    !this.read ? "not read yet" : "have read!"
-  }`;
-};
-
-Book.prototype.toggleRead = function () {
-  return (this.read = !this.read);
-};
 
 // Library functions
 function addBookToLibrary(book, arr) {
@@ -45,7 +47,7 @@ function displayBooks(arr) {
     card.setAttribute("class", "card");
     card.setAttribute("id", `${book.title}`);
     card.setAttribute("idx", `${i}`);
-    card.textContent = `${book.info()}`;
+    card.textContent = `${book.info}`;
 
     const cardCloseBtn = document.createElement("span");
     cardCloseBtn.setAttribute("id", `${i}`);
@@ -58,6 +60,7 @@ function displayBooks(arr) {
     const readBtn = document.createElement("button");
     readBtn.setAttribute("id", `${i}`);
     readBtn.className = "read-status";
+    readBtn.style.padding = "4px";
     readBtn.textContent = "Toggle Read";
     readBtn.addEventListener("click", changeReadStatus, false);
     card.appendChild(readBtn);
@@ -73,6 +76,7 @@ const changeReadStatus = function () {
   myLibrary[idx].toggleRead();
   refreshView();
 };
+
 const removeBookCallback = function () {
   const id = this.getAttribute("id");
   removeBookfromLibrary(id, myLibrary);
@@ -102,8 +106,6 @@ form.addEventListener("submit", function (event) {
   addBookToLibrary(newBook, myLibrary);
   refreshView();
 });
-
-form.addEventListener;
 
 function toggleModal() {
   modal.classList.toggle("show-modal");
